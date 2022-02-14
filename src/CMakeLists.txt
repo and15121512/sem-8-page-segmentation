@@ -14,13 +14,11 @@ add_library(segmentation_lib
   edge.h
   edge.cpp
 )
-# TODO C++ 17 --> C++ 11 !!!
 set_property(TARGET segmentation_lib PROPERTY CXX_STANDARD 17)
 
 add_executable(segmentation
   main_seg.cpp
 )
-# TODO C++ 17 --> C++ 11 !!!
 set_property(TARGET segmentation PROPERTY CXX_STANDARD 17)
 
 target_link_libraries(segmentation
@@ -33,13 +31,11 @@ add_library(evaluation_lib
   evaluation.h
   evaluation.cpp
 )
-# TODO C++ 17 --> C++ 11 !!!
 set_property(TARGET evaluation_lib PROPERTY CXX_STANDARD 17)
 
 add_executable(evaluation
   main_eval.cpp
 )
-# TODO C++ 17 --> C++ 11 !!!
 set_property(TARGET evaluation PROPERTY CXX_STANDARD 17)
 
 target_link_libraries(evaluation
@@ -51,7 +47,6 @@ target_link_libraries(evaluation
 add_executable(xml_parser
   main_parser.cpp
 )
-# TODO C++ 17 --> C++ 11 !!!
 set_property(TARGET xml_parser PROPERTY CXX_STANDARD 17)
 
 target_link_libraries(xml_parser
@@ -81,7 +76,6 @@ set(TestInputs "example1_263"
 			   "example3_674"
 )
 foreach(TestInput ${TestInputs})
-  message("[CMAKE] ${TestBinDir}/segmentation.exe ${TestInDir}/${TestInput}.tif ${TestOutDir}")
   add_test(
     NAME run_${TestInput}
     COMMAND ${TestBinDir}/segmentation.exe ${TestInDir}/${TestInput}.tif ${TestOutDir}
@@ -89,7 +83,7 @@ foreach(TestInput ${TestInputs})
   )
   add_test(
     NAME cmp_${TestInput}
-    COMMAND ${CMAKE_COMMAND} -E compare_files ${TestResDir}/${TestInput}.txt ${TestOutDir}/${TestInput}.txt
+    COMMAND ${CMAKE_COMMAND} -E compare_files --ignore-eol ${TestResDir}/${TestInput}.txt ${TestOutDir}/${TestInput}.txt
     WORKING_DIRECTORY ${TestBinDir}
   )
 endforeach()
